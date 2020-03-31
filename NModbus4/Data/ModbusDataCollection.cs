@@ -1,22 +1,19 @@
-﻿namespace Modbus.Data
-{
-    using System;
+﻿namespace Modbus.Data {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System;
 
     /// <summary>
     ///     A 1 origin collection represetative of the Modbus Data Model.
     /// </summary>
-    public class ModbusDataCollection<TData> : Collection<TData>
-    {
+    public class ModbusDataCollection<TData> : Collection<TData> {
         private bool _allowZeroElement = true;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ModbusDataCollection&lt;TData&gt;" /> class.
         /// </summary>
-        public ModbusDataCollection()
-        {
-            AddDefault(this);
+        public ModbusDataCollection () {
+            AddDefault (this);
             _allowZeroElement = false;
         }
 
@@ -24,18 +21,13 @@
         ///     Initializes a new instance of the <see cref="ModbusDataCollection&lt;TData&gt;" /> class.
         /// </summary>
         /// <param name="data">The data.</param>
-        public ModbusDataCollection(params TData[] data)
-            : this((IList<TData>)data)
-        {
-        }
+        public ModbusDataCollection (params TData[] data) : this ((IList<TData>) data) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ModbusDataCollection&lt;TData&gt;" /> class.
         /// </summary>
         /// <param name="data">The data.</param>
-        public ModbusDataCollection(IList<TData> data)
-            : base(AddDefault(data.IsReadOnly ? new List<TData>(data) : data))
-        {
+        public ModbusDataCollection (IList<TData> data) : base (AddDefault (data.IsReadOnly ? new List<TData> (data) : data)) {
             _allowZeroElement = false;
         }
 
@@ -51,16 +43,14 @@
         ///     index is less than zero.-or-index is greater than
         ///     <see cref="P:System.Collections.ObjectModel.Collection`1.Count"></see>.
         /// </exception>
-        protected override void InsertItem(int index, TData item)
-        {
-            if (!_allowZeroElement && index == 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index), 
+        protected override void InsertItem (int index, TData item) {
+            if (!_allowZeroElement && index == 0) {
+                throw new ArgumentOutOfRangeException (
+                    nameof (index),
                     "0 is not a valid address for a Modbus data collection.");
             }
 
-            base.InsertItem(index, item);
+            base.InsertItem (index, item);
         }
 
         /// <summary>
@@ -72,16 +62,14 @@
         ///     index is less than zero.-or-index is greater than
         ///     <see cref="P:System.Collections.ObjectModel.Collection`1.Count"></see>.
         /// </exception>
-        protected override void SetItem(int index, TData item)
-        {
-            if (index == 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index), 
+        protected override void SetItem (int index, TData item) {
+            if (index == 0) {
+                throw new ArgumentOutOfRangeException (
+                    nameof (index),
                     "0 is not a valid address for a Modbus data collection.");
             }
 
-            base.SetItem(index, item);
+            base.SetItem (index, item);
         }
 
         /// <summary>
@@ -92,26 +80,23 @@
         ///     index is less than zero.-or-index is equal to or greater than
         ///     <see cref="P:System.Collections.ObjectModel.Collection`1.Count"></see>.
         /// </exception>
-        protected override void RemoveItem(int index)
-        {
-            if (index == 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(index), 
+        protected override void RemoveItem (int index) {
+            if (index == 0) {
+                throw new ArgumentOutOfRangeException (
+                    nameof (index),
                     "0 is not a valid address for a Modbus data collection.");
             }
 
-            base.RemoveItem(index);
+            base.RemoveItem (index);
         }
 
         /// <summary>
         ///     Removes all elements from the <see cref="T:System.Collections.ObjectModel.Collection`1"></see>.
         /// </summary>
-        protected override void ClearItems()
-        {
+        protected override void ClearItems () {
             _allowZeroElement = true;
-            base.ClearItems();
-            AddDefault(this);
+            base.ClearItems ();
+            AddDefault (this);
             _allowZeroElement = false;
         }
 
@@ -119,9 +104,8 @@
         ///     Adds a default element to the collection.
         /// </summary>
         /// <param name="data">The data.</param>
-        private static IList<TData> AddDefault(IList<TData> data)
-        {
-            data.Insert(0, default(TData));
+        private static IList<TData> AddDefault (IList<TData> data) {
+            data.Insert (0, default (TData));
             return data;
         }
     }

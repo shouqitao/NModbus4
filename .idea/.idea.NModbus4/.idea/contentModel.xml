@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Tony\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Tony\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_NModbus4.-345244788.00" t="ExcludeRecursive" />
+    <e p="D:\sources\NModbus4" t="IncludeFlat">
+      <e p="global.json" t="Include" />
+      <e p="NModbus4" t="IncludeRecursive">
+        <e p="NModbus4.xproj" t="IncludeRecursive" />
+      </e>
+      <e p="NModbus4.Serial" t="IncludeRecursive">
+        <e p="NModbus4.Serial.xproj" t="IncludeRecursive" />
+      </e>
+      <e p="NModbus4.sln" t="IncludeFlat" />
+      <e p="NModbus4.UnitTests" t="IncludeRecursive">
+        <e p="NModbus4.UnitTests.xproj" t="IncludeRecursive" />
+      </e>
+      <e p="NuGet.config" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Samples" t="IncludeRecursive">
+        <e p="Samples.xproj" t="IncludeRecursive" />
+      </e>
+      <e p="Solution Items" t="Include" />
+    </e>
+  </component>
+</project>
