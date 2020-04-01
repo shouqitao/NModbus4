@@ -1,10 +1,8 @@
-﻿namespace Modbus.Data
-{
+﻿namespace Modbus.Data {
     /// <summary>
     ///     Types of data supported by the Modbus protocol.
     /// </summary>
-    public enum ModbusDataType
-    {
+    public enum ModbusDataType {
         /// <summary>
         ///     Read/write register.
         /// </summary>
