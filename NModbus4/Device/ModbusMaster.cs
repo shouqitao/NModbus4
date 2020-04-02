@@ -1,10 +1,8 @@
-﻿namespace Modbus.Device
-{
-    using System;
+﻿namespace Modbus.Device {
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using System;
     using Data;
     using IO;
     using Message;
@@ -12,12 +10,8 @@
     /// <summary>
     ///     Modbus master device.
     /// </summary>
-    public abstract class ModbusMaster : ModbusDevice, IModbusMaster
-    {
-        internal ModbusMaster(ModbusTransport transport)
-            : base(transport)
-        {
-        }
+    public abstract class ModbusMaster : ModbusDevice, IModbusMaster {
+        internal ModbusMaster (ModbusTransport transport) : base (transport) { }
 
         /// <summary>
         ///    Reads from 1 to 2000 contiguous coils status.
@@ -26,17 +20,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of coils to read.</param>
         /// <returns>Coils status.</returns>
-        public bool[] ReadCoils(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 2000);
+        public bool[] ReadCoils (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 2000);
 
-            var request = new ReadCoilsInputsRequest(
+            var request = new ReadCoilsInputsRequest (
                 Modbus.ReadCoils,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadDiscretes(request);
+            return PerformReadDiscretes (request);
         }
 
         /// <summary>
@@ -46,17 +39,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of coils to read.</param>
         /// <returns>A task that represents the asynchronous read operation.</returns>
-        public Task<bool[]> ReadCoilsAsync(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 2000);
+        public Task<bool[]> ReadCoilsAsync (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 2000);
 
-            var request = new ReadCoilsInputsRequest(
+            var request = new ReadCoilsInputsRequest (
                 Modbus.ReadCoils,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadDiscretesAsync(request);
+            return PerformReadDiscretesAsync (request);
         }
 
         /// <summary>
@@ -66,17 +58,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of discrete inputs to read.</param>
         /// <returns>Discrete inputs status.</returns>
-        public bool[] ReadInputs(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 2000);
+        public bool[] ReadInputs (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 2000);
 
-            var request = new ReadCoilsInputsRequest(
+            var request = new ReadCoilsInputsRequest (
                 Modbus.ReadInputs,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadDiscretes(request);
+            return PerformReadDiscretes (request);
         }
 
         /// <summary>
@@ -86,17 +77,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of discrete inputs to read.</param>
         /// <returns>A task that represents the asynchronous read operation.</returns>
-        public Task<bool[]> ReadInputsAsync(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 2000);
+        public Task<bool[]> ReadInputsAsync (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 2000);
 
-            var request = new ReadCoilsInputsRequest(
+            var request = new ReadCoilsInputsRequest (
                 Modbus.ReadInputs,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadDiscretesAsync(request);
+            return PerformReadDiscretesAsync (request);
         }
 
         /// <summary>
@@ -106,17 +96,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of holding registers to read.</param>
         /// <returns>Holding registers status.</returns>
-        public ushort[] ReadHoldingRegisters(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 125);
+        public ushort[] ReadHoldingRegisters (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 125);
 
-            var request = new ReadHoldingInputRegistersRequest(
+            var request = new ReadHoldingInputRegistersRequest (
                 Modbus.ReadHoldingRegisters,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadRegisters(request);
+            return PerformReadRegisters (request);
         }
 
         /// <summary>
@@ -126,17 +115,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of holding registers to read.</param>
         /// <returns>A task that represents the asynchronous read operation.</returns>
-        public Task<ushort[]> ReadHoldingRegistersAsync(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 125);
+        public Task<ushort[]> ReadHoldingRegistersAsync (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 125);
 
-            var request = new ReadHoldingInputRegistersRequest(
+            var request = new ReadHoldingInputRegistersRequest (
                 Modbus.ReadHoldingRegisters,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadRegistersAsync(request);
+            return PerformReadRegistersAsync (request);
         }
 
         /// <summary>
@@ -146,17 +134,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of holding registers to read.</param>
         /// <returns>Input registers status.</returns>
-        public ushort[] ReadInputRegisters(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 125);
+        public ushort[] ReadInputRegisters (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 125);
 
-            var request = new ReadHoldingInputRegistersRequest(
+            var request = new ReadHoldingInputRegistersRequest (
                 Modbus.ReadInputRegisters,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadRegisters(request);
+            return PerformReadRegisters (request);
         }
 
         /// <summary>
@@ -166,17 +153,16 @@
         /// <param name="startAddress">Address to begin reading.</param>
         /// <param name="numberOfPoints">Number of holding registers to read.</param>
         /// <returns>A task that represents the asynchronous read operation.</returns>
-        public Task<ushort[]> ReadInputRegistersAsync(byte slaveAddress, ushort startAddress, ushort numberOfPoints)
-        {
-            ValidateNumberOfPoints("numberOfPoints", numberOfPoints, 125);
+        public Task<ushort[]> ReadInputRegistersAsync (byte slaveAddress, ushort startAddress, ushort numberOfPoints) {
+            ValidateNumberOfPoints ("numberOfPoints", numberOfPoints, 125);
 
-            var request = new ReadHoldingInputRegistersRequest(
+            var request = new ReadHoldingInputRegistersRequest (
                 Modbus.ReadInputRegisters,
                 slaveAddress,
                 startAddress,
                 numberOfPoints);
 
-            return PerformReadRegistersAsync(request);
+            return PerformReadRegistersAsync (request);
         }
 
         /// <summary>
@@ -185,10 +171,9 @@
         /// <param name="slaveAddress">Address of the device to write to.</param>
         /// <param name="coilAddress">Address to write value to.</param>
         /// <param name="value">Value to write.</param>
-        public void WriteSingleCoil(byte slaveAddress, ushort coilAddress, bool value)
-        {
-            var request = new WriteSingleCoilRequestResponse(slaveAddress, coilAddress, value);
-            Transport.UnicastMessage<WriteSingleCoilRequestResponse>(request);
+        public void WriteSingleCoil (byte slaveAddress, ushort coilAddress, bool value) {
+            var request = new WriteSingleCoilRequestResponse (slaveAddress, coilAddress, value);
+            Transport.UnicastMessage<WriteSingleCoilRequestResponse> (request);
         }
 
         /// <summary>
@@ -198,10 +183,9 @@
         /// <param name="coilAddress">Address to write value to.</param>
         /// <param name="value">Value to write.</param>
         /// <returns>A task that represents the asynchronous write operation.</returns>
-        public Task WriteSingleCoilAsync(byte slaveAddress, ushort coilAddress, bool value)
-        {
-            var request = new WriteSingleCoilRequestResponse(slaveAddress, coilAddress, value);
-            return PerformWriteRequestAsync<WriteSingleCoilRequestResponse>(request);
+        public Task WriteSingleCoilAsync (byte slaveAddress, ushort coilAddress, bool value) {
+            var request = new WriteSingleCoilRequestResponse (slaveAddress, coilAddress, value);
+            return PerformWriteRequestAsync<WriteSingleCoilRequestResponse> (request);
         }
 
         /// <summary>
@@ -210,14 +194,13 @@
         /// <param name="slaveAddress">Address of the device to write to.</param>
         /// <param name="registerAddress">Address to write.</param>
         /// <param name="value">Value to write.</param>
-        public void WriteSingleRegister(byte slaveAddress, ushort registerAddress, ushort value)
-        {
-            var request = new WriteSingleRegisterRequestResponse(
+        public void WriteSingleRegister (byte slaveAddress, ushort registerAddress, ushort value) {
+            var request = new WriteSingleRegisterRequestResponse (
                 slaveAddress,
                 registerAddress,
                 value);
 
-            Transport.UnicastMessage<WriteSingleRegisterRequestResponse>(request);
+            Transport.UnicastMessage<WriteSingleRegisterRequestResponse> (request);
         }
 
         /// <summary>
@@ -227,14 +210,13 @@
         /// <param name="registerAddress">Address to write.</param>
         /// <param name="value">Value to write.</param>
         /// <returns>A task that represents the asynchronous write operation.</returns>
-        public Task WriteSingleRegisterAsync(byte slaveAddress, ushort registerAddress, ushort value)
-        {
-            var request = new WriteSingleRegisterRequestResponse(
+        public Task WriteSingleRegisterAsync (byte slaveAddress, ushort registerAddress, ushort value) {
+            var request = new WriteSingleRegisterRequestResponse (
                 slaveAddress,
                 registerAddress,
                 value);
 
-            return PerformWriteRequestAsync<WriteSingleRegisterRequestResponse>(request);
+            return PerformWriteRequestAsync<WriteSingleRegisterRequestResponse> (request);
         }
 
         /// <summary>
@@ -243,16 +225,15 @@
         /// <param name="slaveAddress">Address of the device to write to.</param>
         /// <param name="startAddress">Address to begin writing values.</param>
         /// <param name="data">Values to write.</param>
-        public void WriteMultipleRegisters(byte slaveAddress, ushort startAddress, ushort[] data)
-        {
-            ValidateData("data", data, 123);
+        public void WriteMultipleRegisters (byte slaveAddress, ushort startAddress, ushort[] data) {
+            ValidateData ("data", data, 123);
 
-            var request = new WriteMultipleRegistersRequest(
+            var request = new WriteMultipleRegistersRequest (
                 slaveAddress,
                 startAddress,
-                new RegisterCollection(data));
+                new RegisterCollection (data));
 
-            Transport.UnicastMessage<WriteMultipleRegistersResponse>(request);
+            Transport.UnicastMessage<WriteMultipleRegistersResponse> (request);
         }
 
         /// <summary>
@@ -262,16 +243,15 @@
         /// <param name="startAddress">Address to begin writing values.</param>
         /// <param name="data">Values to write.</param>
         /// <returns>A task that represents the asynchronous write operation.</returns>
-        public Task WriteMultipleRegistersAsync(byte slaveAddress, ushort startAddress, ushort[] data)
-        {
-            ValidateData("data", data, 123);
+        public Task WriteMultipleRegistersAsync (byte slaveAddress, ushort startAddress, ushort[] data) {
+            ValidateData ("data", data, 123);
 
-            var request = new WriteMultipleRegistersRequest(
+            var request = new WriteMultipleRegistersRequest (
                 slaveAddress,
                 startAddress,
-                new RegisterCollection(data));
+                new RegisterCollection (data));
 
-            return PerformWriteRequestAsync<WriteMultipleRegistersResponse>(request);
+            return PerformWriteRequestAsync<WriteMultipleRegistersResponse> (request);
         }
 
         /// <summary>
@@ -280,16 +260,15 @@
         /// <param name="slaveAddress">Address of the device to write to.</param>
         /// <param name="startAddress">Address to begin writing values.</param>
         /// <param name="data">Values to write.</param>
-        public void WriteMultipleCoils(byte slaveAddress, ushort startAddress, bool[] data)
-        {
-            ValidateData("data", data, 1968);
+        public void WriteMultipleCoils (byte slaveAddress, ushort startAddress, bool[] data) {
+            ValidateData ("data", data, 1968);
 
-            var request = new WriteMultipleCoilsRequest(
+            var request = new WriteMultipleCoilsRequest (
                 slaveAddress,
                 startAddress,
-                new DiscreteCollection(data));
+                new DiscreteCollection (data));
 
-            Transport.UnicastMessage<WriteMultipleCoilsResponse>(request);
+            Transport.UnicastMessage<WriteMultipleCoilsResponse> (request);
         }
 
         /// <summary>
@@ -299,16 +278,15 @@
         /// <param name="startAddress">Address to begin writing values.</param>
         /// <param name="data">Values to write.</param>
         /// <returns>A task that represents the asynchronous write operation.</returns>
-        public Task WriteMultipleCoilsAsync(byte slaveAddress, ushort startAddress, bool[] data)
-        {
-            ValidateData("data", data, 1968);
+        public Task WriteMultipleCoilsAsync (byte slaveAddress, ushort startAddress, bool[] data) {
+            ValidateData ("data", data, 1968);
 
-            var request = new WriteMultipleCoilsRequest(
+            var request = new WriteMultipleCoilsRequest (
                 slaveAddress,
                 startAddress,
-                new DiscreteCollection(data));
+                new DiscreteCollection (data));
 
-            return PerformWriteRequestAsync<WriteMultipleCoilsResponse>(request);
+            return PerformWriteRequestAsync<WriteMultipleCoilsResponse> (request);
         }
 
         /// <summary>
@@ -320,24 +298,23 @@
         /// <param name="numberOfPointsToRead">Number of registers to read.</param>
         /// <param name="startWriteAddress">Address to begin writing (Holding registers are addressed starting at 0).</param>
         /// <param name="writeData">Register values to write.</param>
-        public ushort[] ReadWriteMultipleRegisters(
+        public ushort[] ReadWriteMultipleRegisters (
             byte slaveAddress,
             ushort startReadAddress,
             ushort numberOfPointsToRead,
             ushort startWriteAddress,
-            ushort[] writeData)
-        {
-            ValidateNumberOfPoints("numberOfPointsToRead", numberOfPointsToRead, 125);
-            ValidateData("writeData", writeData, 121);
+            ushort[] writeData) {
+            ValidateNumberOfPoints ("numberOfPointsToRead", numberOfPointsToRead, 125);
+            ValidateData ("writeData", writeData, 121);
 
-            var request = new ReadWriteMultipleRegistersRequest(
+            var request = new ReadWriteMultipleRegistersRequest (
                 slaveAddress,
                 startReadAddress,
                 numberOfPointsToRead,
                 startWriteAddress,
-                new RegisterCollection(writeData));
+                new RegisterCollection (writeData));
 
-            return PerformReadRegisters(request);
+            return PerformReadRegisters (request);
         }
 
         /// <summary>
@@ -350,24 +327,23 @@
         /// <param name="startWriteAddress">Address to begin writing (Holding registers are addressed starting at 0).</param>
         /// <param name="writeData">Register values to write.</param>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        public Task<ushort[]> ReadWriteMultipleRegistersAsync(
+        public Task<ushort[]> ReadWriteMultipleRegistersAsync (
             byte slaveAddress,
             ushort startReadAddress,
             ushort numberOfPointsToRead,
             ushort startWriteAddress,
-            ushort[] writeData)
-        {
-            ValidateNumberOfPoints("numberOfPointsToRead", numberOfPointsToRead, 125);
-            ValidateData("writeData", writeData, 121);
+            ushort[] writeData) {
+            ValidateNumberOfPoints ("numberOfPointsToRead", numberOfPointsToRead, 125);
+            ValidateData ("writeData", writeData, 121);
 
-            var request = new ReadWriteMultipleRegistersRequest(
+            var request = new ReadWriteMultipleRegistersRequest (
                 slaveAddress,
                 startReadAddress,
                 numberOfPointsToRead,
                 startWriteAddress,
-                new RegisterCollection(writeData));
+                new RegisterCollection (writeData));
 
-            return PerformReadRegistersAsync(request);
+            return PerformReadRegistersAsync (request);
         }
 
         /// <summary>
@@ -375,78 +351,65 @@
         /// </summary>
         /// <typeparam name="TResponse">The type of the response.</typeparam>
         /// <param name="request">The request.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-        [SuppressMessage("Microsoft.Usage", "CA2223:MembersShouldDifferByMoreThanReturnType")]
-        public TResponse ExecuteCustomMessage<TResponse>(IModbusMessage request)
-            where TResponse : IModbusMessage, new()
-        {
-            return Transport.UnicastMessage<TResponse>(request);
+        [SuppressMessage ("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        [SuppressMessage ("Microsoft.Usage", "CA2223:MembersShouldDifferByMoreThanReturnType")]
+        public TResponse ExecuteCustomMessage<TResponse> (IModbusMessage request)
+        where TResponse : IModbusMessage, new () {
+            return Transport.UnicastMessage<TResponse> (request);
         }
 
-        private static void ValidateData<T>(string argumentName, T[] data, int maxDataLength)
-        {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
+        private static void ValidateData<T> (string argumentName, T[] data, int maxDataLength) {
+            if (data == null) {
+                throw new ArgumentNullException (nameof (data));
             }
 
-            if (data.Length == 0 || data.Length > maxDataLength)
-            {
+            if (data.Length == 0 || data.Length > maxDataLength) {
                 string msg = $"The length of argument {argumentName} must be between 1 and {maxDataLength} inclusive.";
-                throw new ArgumentException(msg);
+                throw new ArgumentException (msg);
             }
         }
 
-        private static void ValidateNumberOfPoints(string argumentName, ushort numberOfPoints, ushort maxNumberOfPoints)
-        {
-            if (numberOfPoints < 1 || numberOfPoints > maxNumberOfPoints)
-            {
+        private static void ValidateNumberOfPoints (string argumentName, ushort numberOfPoints, ushort maxNumberOfPoints) {
+            if (numberOfPoints < 1 || numberOfPoints > maxNumberOfPoints) {
                 string msg = $"Argument {argumentName} must be between 1 and {maxNumberOfPoints} inclusive.";
-                throw new ArgumentException(msg);
+                throw new ArgumentException (msg);
             }
         }
 
-        private bool[] PerformReadDiscretes(ReadCoilsInputsRequest request)
-        {
-            ReadCoilsInputsResponse response = Transport.UnicastMessage<ReadCoilsInputsResponse>(request);
-            return response.Data.Take(request.NumberOfPoints).ToArray();
+        private bool[] PerformReadDiscretes (ReadCoilsInputsRequest request) {
+            ReadCoilsInputsResponse response = Transport.UnicastMessage<ReadCoilsInputsResponse> (request);
+            return response.Data.Take (request.NumberOfPoints).ToArray ();
         }
 
-        private Task<bool[]> PerformReadDiscretesAsync(ReadCoilsInputsRequest request)
-        {
-            return Task.Factory.StartNew(() => PerformReadDiscretes(request));
+        private Task<bool[]> PerformReadDiscretesAsync (ReadCoilsInputsRequest request) {
+            return Task.Factory.StartNew (() => PerformReadDiscretes (request));
         }
 
-        private ushort[] PerformReadRegisters(ReadHoldingInputRegistersRequest request)
-        {
+        private ushort[] PerformReadRegisters (ReadHoldingInputRegistersRequest request) {
             ReadHoldingInputRegistersResponse response =
-                Transport.UnicastMessage<ReadHoldingInputRegistersResponse>(request);
+                Transport.UnicastMessage<ReadHoldingInputRegistersResponse> (request);
 
-            return response.Data.Take(request.NumberOfPoints).ToArray();
+            return response.Data.Take (request.NumberOfPoints).ToArray ();
         }
 
-        private Task<ushort[]> PerformReadRegistersAsync(ReadHoldingInputRegistersRequest request)
-        {
-            return Task.Factory.StartNew(() => PerformReadRegisters(request));
+        private Task<ushort[]> PerformReadRegistersAsync (ReadHoldingInputRegistersRequest request) {
+            return Task.Factory.StartNew (() => PerformReadRegisters (request));
         }
 
-        private ushort[] PerformReadRegisters(ReadWriteMultipleRegistersRequest request)
-        {
+        private ushort[] PerformReadRegisters (ReadWriteMultipleRegistersRequest request) {
             ReadHoldingInputRegistersResponse response =
-                Transport.UnicastMessage<ReadHoldingInputRegistersResponse>(request);
+                Transport.UnicastMessage<ReadHoldingInputRegistersResponse> (request);
 
-            return response.Data.Take(request.ReadRequest.NumberOfPoints).ToArray();
+            return response.Data.Take (request.ReadRequest.NumberOfPoints).ToArray ();
         }
 
-        private Task<ushort[]> PerformReadRegistersAsync(ReadWriteMultipleRegistersRequest request)
-        {
-            return Task.Factory.StartNew(() => PerformReadRegisters(request));
+        private Task<ushort[]> PerformReadRegistersAsync (ReadWriteMultipleRegistersRequest request) {
+            return Task.Factory.StartNew (() => PerformReadRegisters (request));
         }
 
-        private Task PerformWriteRequestAsync<T>(IModbusMessage request)
-            where T : IModbusMessage, new()
-        {
-            return Task.Factory.StartNew(() => Transport.UnicastMessage<T>(request));
+        private Task PerformWriteRequestAsync<T> (IModbusMessage request)
+        where T : IModbusMessage, new () {
+            return Task.Factory.StartNew (() => Transport.UnicastMessage<T> (request));
         }
     }
 }
